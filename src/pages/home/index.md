@@ -1,9 +1,11 @@
 ---
-templateKey: 'home-page'
-path: /
-title: HOME PAGE
+templateKey: home-page
+title: WELCOME!
 ---
-### COFFEE IS GREATTT
-YEEEEEEE
+### I love Shibas!!
+
+They are nice and have curly tails. 
 
 
+
+shrimba
