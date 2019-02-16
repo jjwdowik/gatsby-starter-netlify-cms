@@ -40,6 +40,9 @@ export default class Contact extends React.Component {
   }
 
   render() {
+    console.log("about to render")
+    console.log(process.env)
+    console.log(RECAPTCHA_KEY)
     return (
       <div>
         <h1>reCAPTCHA 2</h1>
