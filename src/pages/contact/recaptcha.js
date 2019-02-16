@@ -41,9 +41,6 @@ export default class Contact extends React.Component {
   }
 
   render() {
-    console.log("about to render")
-    console.log(process.env)
-    console.log(RECAPTCHA_KEY)
     return (
       <Layout>
         <section className="section">
