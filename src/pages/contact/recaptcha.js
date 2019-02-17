@@ -14,7 +14,7 @@ function encode(data) {
 export default class Contact extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {error: false};
   }
 
   handleChange = e => {
@@ -28,16 +28,21 @@ export default class Contact extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": form.getAttribute("name"),
-        ...this.state
+    if(this.state["g-recaptcha-response"] !== undefined) {
+      this.setState({error: false});
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({
+          "form-name": form.getAttribute("name"),
+          ...this.state
+        })
       })
-    })
-      .then(() => navigateTo(form.getAttribute("action")))
-      .catch(error => alert(error));
+        .then(() => navigateTo(form.getAttribute("action")))
+        .catch(error => alert(error));
+    } else {
+      this.setState({error: true, errorMessage: "Please fill out the reCAPTCHA verification."});
+    }
   };
 
   render() {
@@ -84,6 +89,11 @@ export default class Contact extends React.Component {
                 />
                 <p>
                   <button type="submit">Send</button>
+                </p>
+                <p>
+                  {this.state.error &&
+                    this.state.errorMessage
+                  }
                 </p>
               </form>
             </div>
